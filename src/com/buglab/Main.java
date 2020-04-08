@@ -9,11 +9,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private final  static String title="SecurityHacker";
 
+
     @Override
+
     public void start(Stage mainUI) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("configure.fxml"));
         mainUI.setTitle(title);
-        mainUI.setScene(new Scene(root, 300, 275));
+        mainUI.setScene(new Scene(root, 800, 475));
         mainUI.show();
     }
 
