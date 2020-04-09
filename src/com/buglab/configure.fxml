@@ -25,6 +25,7 @@
                             <top>
                                 <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT">
                                     <buttons>
+                                        <Button fx:id="codeql_excute_analyze" mnemonicParsing="false" text="分析" />
                                         <Button fx:id="codeql_excute_query" mnemonicParsing="false" text="查询" />
                                         <Button fx:id="codeql_excute_upgrade" mnemonicParsing="false" text="更新" />
                                         <Button fx:id="codeql_excute_create" mnemonicParsing="false" text="创建" />

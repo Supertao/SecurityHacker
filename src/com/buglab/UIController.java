@@ -93,7 +93,7 @@ public class UIController {
         {
             System.out.println(codeql_excute_path + ":" + codeql_database_path + "::" + codeql_source_path);
             if (codeql_excute_path != null && codeql_database_path != null) {
-                String[] cmd=new String[]{codeql_excute_path.getPath(),"version"};
+                String[] cmd=new String[]{codeql_excute_path.getPath(),"query","run","-d="+codeql_database_path.getPath(),"/Users/tao/Downloads/codeql-case/codeql/java/ql/src/java-sec/commandi/taint/find_taint_Runtimecommand.ql"};
                 try {
 
                     InputStream inputStream = RuntimeUtils.runExec(cmd);
