@@ -4,29 +4,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buglab.UIController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buglab.UIController">
     <tabs>
         <Tab text="Run">
             <content>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0">
                     <content>
-                        <BorderPane prefHeight="369.0" prefWidth="599.0">
+                        <BorderPane prefHeight="369.0" prefWidth="699.0">
                             <top>
                                 <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT">
                                     <buttons>
-                                        <Button mnemonicParsing="false" text="查询" />
-                                        <Button mnemonicParsing="false" text="更新" />
-                                        <Button mnemonicParsing="false" text="创建" />
+                                        <Button fx:id="codeql_excute_query" mnemonicParsing="false" text="查询" />
+                                        <Button fx:id="codeql_excute_upgrade" mnemonicParsing="false" text="更新" />
+                                        <Button fx:id="codeql_excute_create" mnemonicParsing="false" text="创建" />
                                     </buttons>
                                     <opaqueInsets>
                                         <Insets />
@@ -39,9 +40,21 @@
                                     </padding>
                                 </ButtonBar>
                             </top>
-                            <center>
-                                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                            </center>
+                     <left>
+                        <ListView fx:id="mainListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" left="5.0" />
+                           </BorderPane.margin></ListView>
+                     </left>
+                     <center>
+                        <TextArea fx:id="exeute_result" prefHeight="324.0" prefWidth="438.0" BorderPane.alignment="CENTER">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" right="5.0" />
+                           </BorderPane.margin></TextArea>
+                     </center>
                         </BorderPane>
                     </content>
                 </ScrollPane>
@@ -64,8 +77,8 @@
                         <Label text="codeql execute:" />
                         <Label layoutX="10.0" layoutY="65.0" text="codeql database:" GridPane.rowIndex="1" />
                         <Label layoutX="10.0" layoutY="189.0" text="codeql sourcecode:" GridPane.rowIndex="2" />
-                        <Button fx:id="codeql_excute_button" alignment="CENTER" layoutX="310.0" layoutY="111.0" mnemonicParsing="false" onAction="#codeql_excute_click" text="Choose Executable Path" GridPane.columnIndex="1" />
-                        <Button fx:id="codeql_database_button" alignment="CENTER" mnemonicParsing="false" text="Choose Database Folder" onAction="#codeql_database_click" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="codeql_excute_button" alignment="CENTER" layoutX="310.0" layoutY="111.0" mnemonicParsing="false" text="Choose Executable Path" GridPane.columnIndex="1" />
+                        <Button fx:id="codeql_database_button" alignment="CENTER" mnemonicParsing="false" text="Choose Database Folder" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button fx:id="codeql_source_button" alignment="CENTER" layoutX="310.0" layoutY="111.0" mnemonicParsing="false" text="Choose SourceCode Folder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField text="Choose code language" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label layoutX="30.0" layoutY="189.0" text="language:" GridPane.rowIndex="3" />
@@ -78,4 +91,7 @@
                 </GridPane>
             </content></Tab>
     </tabs>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </TabPane>
