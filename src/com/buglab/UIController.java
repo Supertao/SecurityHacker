@@ -18,6 +18,9 @@ public class UIController {
     private Button codeql_excute_button,codeql_database_button,codeql_source_button;
     @FXML
     private Button codeql_excute_query,codeql_excute_upgrade,codeql_excute_create;
+    @FXML
+    private ListView mainListView;
+    private ObservableList<String> listViewData = FXCollections.observableArrayList();
 
     @FXML
     private  void initialize(){
@@ -40,7 +43,16 @@ public class UIController {
             codeql_database_path=selectedDirectory.getPath();
             if(codeql_database_path!=""){
                 codeql_database_button.setText(codeql_database_path);
+                //罗列出数据库目录下 的所有数据库
+                File[] files=codeql_database_path.listFiles();
+                for(File file:files){
+                    //判断是否是文件
+                    if(file.isDirectory())
+                        listViewData.add(file.getPath());
+                }
+                mainListView.setItems(listViewData);
             }
+            
         });
 
         codeql_source_button.setOnAction(event -> {
