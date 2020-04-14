@@ -93,7 +93,7 @@ public class UIController {
             }
         });
 
-        codeql_ql_button.setOnAction(event -> {
+         codeql_ql_button.setOnAction(event -> {
             DirectoryChooser folderChooser = new DirectoryChooser();
             folderChooser.setTitle("Select CodeQl QLPath:");
             codeql_ql_path = folderChooser.showDialog(fileStage);
@@ -104,8 +104,26 @@ public class UIController {
                 //create root
                 //TreeItem<File> rootItem = new TreeItem<>(codeql_ql_path);
                 if (codeql_ql_path.listFiles() != null) {
-                    FileTreeItem fileTreeItem=new FileTreeItem(codeql_ql_path);
-                    qlTreeview.setRoot(fileTreeItem.getNodesForDirectory(codeql_ql_path));
+                    Path filepath=Paths.get(codeql_ql_path.toURI());
+                    PathItem pathItem=new PathItem(filepath);
+                    qlTreeview.setRoot(createNode(pathItem));
+                    ContextMenu menu = new ContextMenu();
+                    MenuItem addItem = new MenuItem("Run");
+                    addItem.setOnAction(e ->{
+                        //createNode(pathItem).getChildren().add(new TreeItem<>("节点:" + treeItem.getChildren().size()));
+                        TreeItem<PathItem> selectItem=qlTreeview.getSelectionModel().getSelectedItem();
+                        System.out.println(selectItem.getValue().getPath());
+                        Path selectPath=selectItem.getValue().getPath();
+                        //
+                        if(selectPath.endsWith(".ql")){
+                            
+                        }
+                        
+
+                    });
+                    menu.getItems().add(addItem);
+                    qlTreeview.setContextMenu(menu);
+
                 }
             }
 
