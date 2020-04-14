@@ -7,11 +7,14 @@ import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javafx.scene.control.TreeItem;
+
 //https://www.w3cschool.cn/java/javafx-filechooser.html
 
 public class UIController {
@@ -97,26 +100,36 @@ public class UIController {
             DirectoryChooser folderChooser = new DirectoryChooser();
             folderChooser.setTitle("Select CodeQl QLPath:");
             codeql_ql_path = folderChooser.showDialog(fileStage);
-            if (codeql_ql_path.getPath()!=""){
+            //System.out.println(codeql_ql_path.getPath());
+            if (codeql_ql_path!=null){
                 codeql_ql_button.setText(codeql_ql_path.getPath());
                 //SearchFile(qlListView, qlListData, codeql_ql_path, codeql_ql_button);
                 //https://blog.csdn.net/luckGeek/article/details/88944089
                 //create root
                 //TreeItem<File> rootItem = new TreeItem<>(codeql_ql_path);
                 if (codeql_ql_path.listFiles() != null) {
-                    Path filepath=Paths.get(codeql_ql_path.toURI());
+                    Path filepath= Paths.get(codeql_ql_path.toURI());
                     PathItem pathItem=new PathItem(filepath);
                     qlTreeview.setRoot(createNode(pathItem));
                     ContextMenu menu = new ContextMenu();
                     MenuItem addItem = new MenuItem("Run");
                     addItem.setOnAction(e ->{
                         //createNode(pathItem).getChildren().add(new TreeItem<>("节点:" + treeItem.getChildren().size()));
-                        TreeItem<PathItem> selectItem=qlTreeview.getSelectionModel().getSelectedItem();
-                        System.out.println(selectItem.getValue().getPath());
+                        TreeItem<PathItem> selectItem=(TreeItem<PathItem>) qlTreeview.getSelectionModel().getSelectedItem();
+                        //System.out.println(selectItem.getValue().getPath());
                         Path selectPath=selectItem.getValue().getPath();
-                        //
-                        if(selectPath.endsWith(".ql")){
-                            
+
+                        //如果是ql
+                        Boolean isQl=selectPath.getFileName().toString().endsWith("ql");
+
+                        if(isQl&&selectPath!=null){
+
+                            String[] cmd = new String[]{codeql_excute_path.getPath(), "query", "run", "-d=" + codeql_database_path.getPath(),selectPath.toString()};
+                            System.out.println(cmd);
+                            ExcuteCmd(cmd);
+                        }else
+                        {
+                            System.out.println("xxx"+selectPath.toString());
                         }
                         
 
@@ -125,6 +138,8 @@ public class UIController {
                     qlTreeview.setContextMenu(menu);
 
                 }
+            }else {
+                System.exit(1);
             }
 
         });
@@ -134,18 +149,7 @@ public class UIController {
             System.out.println(codeql_excute_path + ":" + codeql_database_path + "::" + codeql_source_path);
             if (codeql_excute_path != null && codeql_database_path != null) {
                 String[] cmd = new String[]{codeql_excute_path.getPath(), "query", "run", "-d=" + codeql_database_path.getPath(), "/Users/tao/Downloads/codeql-case/codeql/java/ql/src/java-sec/commandi/taint/find_taint_Runtimecommand.ql"};
-                try {
-
-                    InputStream inputStream = RuntimeUtils.runExec(cmd);
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line = null;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        exeute_result.appendText(line + "\r\n");
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                ExcuteCmd(cmd);
 
             } else {
 
@@ -158,5 +162,29 @@ public class UIController {
 
         });
     }
+
+    private TreeItem<PathItem> createNode(PathItem pathItem){
+        return PathTreeItem.createNode(pathItem);
+    }
+
+    private void ExcuteCmd(String[] cmd){
+
+        try {
+
+            InputStream inputStream = RuntimeUtils.runExec(cmd);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                exeute_result.appendText(line + "\r\n");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }
