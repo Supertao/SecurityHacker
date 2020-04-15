@@ -1,0 +1,33 @@
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #ffffff;
+}
+
+.header-section {
+    -fx-padding: 5px;
+    -fx-font-size: 15px;
+    -fx-background-color: #ffffff;
+}
+
+
+#button_bar{
+    -fx-padding: 8px;
+    -fx-font-size: 15px;
+    -fx-background-color: #ffffff;
+
+}
+
+#gridpane{
+    -fx-padding: 5 20 5 20;
+    -fx-wrap-text: true;
+    -fx-font-size: 15px;
+}
+
+#gridpane Label {
+    -fx-font-size: 15px;
+    -fx-padding: 10 15 10 15;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+}

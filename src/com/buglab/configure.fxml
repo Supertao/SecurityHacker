@@ -16,15 +16,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buglab.UIController">
+<TabPane  tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.buglab.UIController">
     <tabs>
         <Tab text="Run">
             <content>
-                <ScrollPane prefHeight="200.0" prefWidth="699.0">
-                    <content>
-                        <BorderPane prefHeight="369.0" prefWidth="699.0">
+                        <BorderPane  styleClass="header-section" >
                             <top>
-                                <ButtonBar buttonMinWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT">
+                                <ButtonBar id="button_bar" nodeOrientation="RIGHT_TO_LEFT"  BorderPane.alignment="CENTER_RIGHT">
                                     <buttons>
                                         <Button fx:id="codeql_excute_analyze" mnemonicParsing="false" text="分析" />
                                         <Button fx:id="codeql_excute_query" mnemonicParsing="false" text="查询" />
@@ -34,50 +32,36 @@
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
-                                    <BorderPane.margin>
-                                        <Insets />
-                                    </BorderPane.margin>
-                                    <padding>
-                                        <Insets right="150.0" />
-                                    </padding>
+
                                 </ButtonBar>
                             </top>
                      <left>
-                         <TreeView fx:id="qlTreeview" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                             <BorderPane.margin>
-                                 <Insets bottom="5.0" left="5.0" />
-                             </BorderPane.margin></TreeView>
+                         <TreeView fx:id="qlTreeview" id="ql_treeView" BorderPane.alignment="CENTER"></TreeView>
                      </left>
                      <center>
-                        <TextArea fx:id="exeute_result" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets bottom="5.0" />
-                           </BorderPane.margin></TextArea>
+                        <TextArea fx:id="exeute_result" id="exeute_textarea" BorderPane.alignment="CENTER"></TextArea>
                      </center>
                             <right>
-                                <ListView fx:id="mainListView" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                    <BorderPane.margin>
-                                        <Insets bottom="5.0" right="5.0" />
-                                    </BorderPane.margin></ListView>
+                                <ListView fx:id="mainListView"  BorderPane.alignment="CENTER"></ListView>
                             </right>
                         </BorderPane>
                     </content>
-                </ScrollPane>
-            </content></Tab>
+
+        </Tab>
         <Tab text="Options">
             <content>
-                <GridPane alignment="CENTER">
+                <GridPane alignment="CENTER" id="gridpane">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="171.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="379.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints  vgrow="SOMETIMES" />
+                        <RowConstraints  vgrow="SOMETIMES" />
+                        <RowConstraints  vgrow="SOMETIMES" />
+                  <RowConstraints  vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints  vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="codeql execute:" />
@@ -93,9 +77,6 @@
                         <Label fx:id="code_ql_path" layoutX="40.0" layoutY="155.0" text="codeql QL:" GridPane.rowIndex="3" />
                         <Button fx:id="codeql_ql_button" alignment="CENTER" mnemonicParsing="false" text="Choose QL Folder" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
-                    <padding>
-                        <Insets left="30.0" right="30.0" />
-                    </padding>
                 </GridPane>
             </content></Tab>
     </tabs>

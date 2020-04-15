@@ -31,7 +31,7 @@ public class UIController {
     @FXML
     private TreeView qlTreeview;
     private ObservableList<String> mainListData = FXCollections.observableArrayList();
-    private ObservableList<String> qlListData = FXCollections.observableArrayList();
+
     @FXML
     private TextArea exeute_result;
 
@@ -129,7 +129,11 @@ public class UIController {
                             ExcuteCmd(cmd);
                         }else
                         {
-                            System.out.println("xxx"+selectPath.toString());
+                            ///Users/tao/Desktop/codeql/codeql database  run-queries /Users/tao/Downloads/codeql-case/java-sec /Users/tao/Downloads/codeql-case/codeql/java/ql/src/Security
+                            String[] cmd = new String[]{codeql_excute_path.getPath(), "database", "run-queries", codeql_database_path.getPath(),selectPath.toString()};
+                            System.out.println(cmd);
+
+                            ExcuteCmd(cmd);
                         }
                         
 
